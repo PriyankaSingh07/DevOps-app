@@ -6,7 +6,7 @@ pipeline {
   // This can be http or https
   NEXUS_PROTOCOL = "http"
   // Where your Nexus is running. In my case:
-  NEXUS_URL = "172.18.0.1:8081"
+  NEXUS_URL = "10.73.123.210:8081"
   // Repository where we will upload the artifact
   NEXUS_REPOSITORY = "maven-snapshots"
   // Jenkins credential id to authenticate to Nexus OSS
@@ -16,7 +16,7 @@ pipeline {
     to obtains this address : $ docker-machine ip
     Linux: set localhost to SONARQUBE_URL
   */
-  SONARQUBE_URL = "http://172.18.0.1"
+  SONARQUBE_URL = "http://10.73.123.210"
   SONARQUBE_PORT = "9000"
  }
  options {
@@ -34,8 +34,7 @@ pipeline {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+       args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml' 
        // to use the same node and workdir defined on top-level pipeline for all docker agents
        reuseNode true
       }
@@ -48,12 +47,12 @@ pipeline {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+       args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
        reuseNode true
       }
      }
      steps {
+      sh ' sleep 300'
       sh ' mvn checkstyle:checkstyle'
       step([$class: 'CheckStylePublisher',
        //canRunOnFailed: true,
@@ -74,8 +73,7 @@ pipeline {
    agent {
     docker {
      image 'maven:3.6.0-jdk-8-alpine'
-     args '-v /root/.m2/repository:/root/.m2/repository'
-     args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+     args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
      reuseNode true
     }
    }
@@ -95,8 +93,7 @@ pipeline {
    agent {
     docker {
      image 'maven:3.6.0-jdk-8-alpine'
-     args '-v /root/.m2/repository:/root/.m2/repository'
-     args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+     args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
      reuseNode true
     }
    }
@@ -121,8 +118,7 @@ pipeline {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+       args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
        reuseNode true
       }
      }
@@ -136,8 +132,7 @@ pipeline {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+       args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
        reuseNode true
       }
      }
@@ -151,8 +146,7 @@ pipeline {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+       args '-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
        reuseNode true
       }
      }
@@ -165,8 +159,7 @@ pipeline {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
-       args "-v /root/.m2/repository:/root/.m2/repository"
-       args '-v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml'
+       args "-v /root/.m2/repository:/root/.m2/repository -v /home/cloud-user/CI/.m2/settings.xml:/usr/share/maven/conf/settings.xml"
        reuseNode true
       }
      }
