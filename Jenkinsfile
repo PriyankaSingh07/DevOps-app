@@ -52,7 +52,6 @@ pipeline {
       }
      }
      steps {
-      sh ' sleep 300'
       sh ' mvn checkstyle:checkstyle'
       step([$class: 'CheckStylePublisher',
        //canRunOnFailed: true,
