@@ -1,4 +1,4 @@
-podTemplate(cloud: 'kubernetes', containers: [
+podTemplate(cloud: 'kubernetes', label: 'jenkins-slave', containers: [
     containerTemplate(
         name: 'jnlp',
         image: 'utilitynode:latest',
@@ -10,7 +10,6 @@ podTemplate(cloud: 'kubernetes', containers: [
     )
 ],
 serviceAccount: 'jenkins-fin-test',
-    label: 'jenkins-slave',
     namespace: 'cicd-fin-test',
     name: 'jenkins-slave',
 volumes: [
