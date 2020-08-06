@@ -5,7 +5,7 @@ agent none
  }
  stages {
   stage('SCM') {
-  agent { label 'jenkins-slave' } 
+  agent { label 'jenkins' } 
    steps {
    echo 'Checkout'
     checkout scm
