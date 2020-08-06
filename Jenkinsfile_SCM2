@@ -1,0 +1,12 @@
+pipeline {
+podTemplate {
+    node(jenkins-slave) {
+          stage('SCM') {
+   steps {
+   echo 'Checkout'
+    checkout scm
+   }
+  }
+    }
+} 
+}
