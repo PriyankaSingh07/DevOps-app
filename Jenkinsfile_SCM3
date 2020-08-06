@@ -16,7 +16,7 @@ volumes: [
 ]
 ){
 
-    node('jenkins-slave') {
+    node(label) {
         stage('SCM') {
         steps {
             container('jnlp') {
