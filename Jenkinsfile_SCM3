@@ -15,7 +15,7 @@ volumes: [
     persistentVolumeClaim(mountPath: '/var/jenkins_home', claimName: 'jenkins-slave-fin-test-pvc', readOnly: false)
 ],
 {
-    node(label) {
+    node('jenkins-slave') {
         stage('SCM') {
         steps {
             container('jnlp') {
