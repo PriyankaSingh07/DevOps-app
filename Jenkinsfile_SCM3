@@ -1,4 +1,4 @@
-podTemplate(cloud: 'kubernetes', label: 'jenkins-slave', containers: [
+podTemplate(cloud: 'kubernetes', label: 'jenkins-slave', name: 'jenkins-slave', namespace: 'cicd-fin-test', containers: [
     containerTemplate(
         name: 'jnlp',
         image: 'utilitynode:latest',
@@ -10,8 +10,6 @@ podTemplate(cloud: 'kubernetes', label: 'jenkins-slave', containers: [
     )
 ],
 serviceAccount: 'jenkins-fin-test',
-    namespace: 'cicd-fin-test',
-    name: 'jenkins-slave',
 volumes: [
     persistentVolumeClaim(mountPath: '/var/jenkins_home', claimName: 'jenkins-slave-fin-test-pvc', readOnly: false)
 ]
