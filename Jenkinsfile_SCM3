@@ -1,5 +1,4 @@
-def label = "jenkins-slave"
-podTemplate(cloud: 'kubernetes', label: label, name: 'jenkins-slave', namespace: 'cicd-fin-test', containers: [
+podTemplate(cloud: 'kubernetes', label: 'jenkins-slave', name: 'jenkins-slave', namespace: 'cicd-fin-test', containers: [
     containerTemplate(
         name: 'jnlp',
         image: 'utilitynode:latest',
