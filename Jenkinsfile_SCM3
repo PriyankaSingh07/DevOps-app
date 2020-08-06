@@ -13,7 +13,7 @@ podTemplate(cloud: 'kubernetes', label: label, name: 'jenkins-slave', namespace:
 serviceAccount: 'jenkins-fin-test',
 volumes: [
     persistentVolumeClaim(mountPath: '/var/jenkins_home', claimName: 'jenkins-slave-fin-test-pvc', readOnly: false)
-],
+])
 {
         stage('SCM') {
             container('jnlp') {
@@ -21,4 +21,4 @@ volumes: [
             }
     }
 }
-)
+
