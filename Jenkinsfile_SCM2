@@ -1,12 +1,12 @@
-pipeline {
 podTemplate {
     node(jenkins-slave) {
-          stage('SCM') {
+          stages{
+		  stage('SCM') {
    steps {
    echo 'Checkout'
     checkout scm
    }
   }
-    }
+ }
 } 
 }
