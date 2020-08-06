@@ -5,13 +5,28 @@ podTemplate(cloud: 'kubernetes', containers: [
         ttyEnabled: true,
         privileged: true,
         alwaysPullImage: false,
-        workingDir: '/home/jenkins/agent'
+        workingDir: '/home/jenkins/agent',
+        command: 'jenkins-agent'
     ),
     ...
 ],
+serviceAccount: 'jenkins-fin-test',
+    label: 'jenkins-slave',
+    namespace: 'cicd-fin-test'
+    name: 'jenkins-slave'
 volumes: [
     persistentVolumeClaim(mountPath: '/var/jenkins_home', claimName: 'jenkins-slave-fin-test-pvc', readOnly: false)
 ]
-) {
-   ...
+){
+
+    node('jenkins-slave') {
+        stage('SCM') {
+        steps {
+            container('jnlp') {
+            checkout scm
+            }
+        }
+
+    }
+}
 }
