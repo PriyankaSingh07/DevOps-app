@@ -1,0 +1,17 @@
+podTemplate(cloud: 'kubernetes', containers: [
+    containerTemplate(
+        name: 'jnlp',
+        image: 'utilitynode:latest',
+        ttyEnabled: true,
+        privileged: true,
+        alwaysPullImage: false,
+        workingDir: '/home/jenkins/agent'
+    ),
+    ...
+],
+volumes: [
+    persistentVolumeClaim(mountPath: '/var/jenkins_home', claimName: 'jenkins-slave-fin-test-pvc', readOnly: false)
+]
+) {
+   ...
+}
