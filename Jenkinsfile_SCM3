@@ -7,8 +7,7 @@ podTemplate(cloud: 'kubernetes', containers: [
         alwaysPullImage: false,
         workingDir: '/home/jenkins/agent',
         command: 'jenkins-agent'
-    ),
-    ...
+    )
 ],
 serviceAccount: 'jenkins-fin-test',
     label: 'jenkins-slave',
