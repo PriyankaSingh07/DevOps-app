@@ -1,12 +1,7 @@
 podTemplate {
-    node(jenkins-slave) {
-          stages{
-		  stage('SCM') {
-   steps {
-   echo 'Checkout'
-    checkout scm
-   }
-  }
- }
-} 
+    node(POD_LABEL) {
+        stage('Run shell') {
+            sh 'echo hello world'
+        }
+    }
 }
