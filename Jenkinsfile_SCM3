@@ -11,8 +11,8 @@ podTemplate(cloud: 'kubernetes', containers: [
 ],
 serviceAccount: 'jenkins-fin-test',
     label: 'jenkins-slave',
-    namespace: 'cicd-fin-test'
-    name: 'jenkins-slave'
+    namespace: 'cicd-fin-test',
+    name: 'jenkins-slave',
 volumes: [
     persistentVolumeClaim(mountPath: '/var/jenkins_home', claimName: 'jenkins-slave-fin-test-pvc', readOnly: false)
 ]
