@@ -1,0 +1,15 @@
+pipeline {
+ agent any
+ 
+ options {
+  skipDefaultCheckout()
+ }
+ stages {
+  stage('SCM') {
+   steps {
+   echo 'Checkout'
+    checkout scm
+   }
+  }
+ }
+}
