@@ -4,6 +4,7 @@
  options {
   skipDefaultCheckout()
  }
+  stages {
  stage('CheckStyle') {
      agent {
       docker {
@@ -22,4 +23,5 @@
       ])
      }
     }
-}
+   }
+ }
