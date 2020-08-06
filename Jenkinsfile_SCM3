@@ -17,12 +17,9 @@ volumes: [
 {
     node {
         stage('SCM') {
-        steps {
             container('jnlp') {
             checkout scm
             }
-        }
-
     }
 }
 }
