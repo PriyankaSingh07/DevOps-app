@@ -49,9 +49,11 @@ spec:
   }
   stages {
             stage('SCM') {
+            steps {
             container('jnlp') {
             checkout scm
             }
     }
       }
+    }
     }
