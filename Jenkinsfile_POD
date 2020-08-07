@@ -1,0 +1,57 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml """
+apiVersion: "v1"
+kind: "Pod"
+spec:
+  containers:
+  - command:
+    - "jenkins-agent"
+    image: "utilitynode:latest"
+    imagePullPolicy: "IfNotPresent"
+    name: "jnlp"
+    resources:
+      limits: {}
+      requests: {}
+    securityContext:
+      privileged: true
+    tty: true
+    volumeMounts:
+    - mountPath: "/var/jenkins_home"
+      name: "volume-0"
+      readOnly: false
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  hostAliases:
+  - hostnames:
+    - "evosfncll367.ad.infosys.com"
+    ip: "10.73.15.25"
+  hostNetwork: false
+  restartPolicy: "Never"
+  securityContext: {}
+  serviceAccount: "jenkins-fin-test"
+  volumes:
+  - name: "volume-0"
+    persistentVolumeClaim:
+      claimName: "jenkins-slave-fin-test-pvc"
+      readOnly: false
+  - name: "workspace-volume"
+    persistentVolumeClaim:
+      claimName: "jenkins-slave-fin-test-pvc"
+      readOnly: false
+  - emptyDir:
+      medium: ""
+"""
+    }
+  }
+  stages {
+            stage('SCM') {
+            container('jnlp') {
+            checkout scm
+            }
+    }
+      }
+    }
