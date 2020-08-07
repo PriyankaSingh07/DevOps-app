@@ -7,7 +7,9 @@ pipeline {
 stages {
   stage('SCM') {
    steps {
-   cd /var/jenkins_home
+   bat """
+            cd /var/jenkins_home
+        """ 
     checkout scm
     sleep 500
    }
