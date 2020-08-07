@@ -8,10 +8,10 @@ stages {
    steps {
   dir('/var/jenkins_home'){
   echo $PWD
-            sh "$PWD"
-             checkout scm
-        }
+      sh $PWD
+         checkout scm
+     }
    }
   }
-}
+ }
 }
