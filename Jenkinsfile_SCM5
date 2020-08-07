@@ -3,13 +3,14 @@ pipeline {
  options {
   skipDefaultCheckout()
  }
-
 stages {
   stage('SCM') {
    steps {
-  bash 'cd /var/jenkins_home'
-    checkout scm
-    sleep 500
+  dir('/var/jenkins_home'){
+  echo $PWD
+            sh "$PWD"
+             checkout scm
+        }
    }
   }
 }
