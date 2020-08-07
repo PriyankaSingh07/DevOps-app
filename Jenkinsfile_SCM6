@@ -1,0 +1,14 @@
+pipeline {
+ agent {label 'jenkins-slave'}
+ options {
+  skipDefaultCheckout()
+ }
+stages {
+    stage('SCM') {
+      steps {
+        sh "cd /var/jenkins_home"
+          checkout scm
+      }
+    }
+  }
+}
