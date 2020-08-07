@@ -6,12 +6,8 @@ pipeline {
 stages {
   stage('SCM') {
    steps {
-  dir('/var/jenkins_home'){
-  echo $PWD
-      sh 'PWD'
-         checkout scm
-     }
+    checkout scm
    }
   }
- }
+}
 }
