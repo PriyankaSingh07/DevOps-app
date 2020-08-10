@@ -1,0 +1,21 @@
+pipeline {
+    agent {
+        kubernetes {
+            customWorkspace '/home/jenkins/agent/workspace/DevOps'
+            label 'CI'
+            defaultContainer 'jnlp'
+            yamlFile 'k8sworkerpod.yml'
+        }
+    }
+stages {
+    stage('Compile') {
+     steps {
+        echo " Working outside"
+        container('maven') {
+          echo " Working inside the maven container"
+          sh ' mvn clean compile'
+        }
+     }
+    }
+  }
+}
