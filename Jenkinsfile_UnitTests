@@ -17,13 +17,9 @@ stages {
         }
     }
 	post {
-	echo " Working outside"
-        container('maven') {
-          echo " Working inside the maven container"
     always {
        junit 'target/surefire-reports/**/*.xml'
     }
-	}
    } 
   }
  }
