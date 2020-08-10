@@ -27,22 +27,16 @@ spec:
       name: "persist-volume"
       readOnly: false
     - mountPath: "/root/.m2"
-      name: "maven-repo-volume"
+      name: "maven-volume"
       readOnly: false
   hostNetwork: false
   nodeSelector:
     kubernetes.io/os: "linux"
   restartPolicy: "Never"
-  volumes:
-  - hostPath:
-      path: "/home/jenkins/agent/jenkinslave"
-    name: "workspace-volume"
-  - hostPath:
-      path: "/home/jenkins/agent/jenkinslave"
-    name: "slave-volume"    
-  - hostPath:
-      path: "/home/jenkins/agent/.m2"
-    name: "maven-repo-volume"    
+  volumes:    
   - name: "persist-volume"
     persistentVolumeClaim:
       claimName: jenkins-slave-fin-test-pvc
+  - name: "maven-volume"
+    persistentVolumeClaim:
+      claimName: maven-fin-test-pvc
