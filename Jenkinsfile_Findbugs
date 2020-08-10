@@ -1,0 +1,23 @@
+pipeline {
+    agent {
+        kubernetes {
+            customWorkspace '/home/jenkins/agent/workspace/DevOps'
+            label 'CI'
+            defaultContainer 'jnlp'
+            yamlFile 'k8sworkerpod.yml'
+        }
+    }
+stages {
+    stage('Findbugs') {
+     steps {
+        echo " Working outside"
+        container('maven') {
+          echo " Working inside the maven container"
+          sh ' mvn findbugs:findbugs'
+		  // using findbugs plugin
+		  findbugs pattern: '**/target/findbugsXml.xml'
+        }
+     }
+    }
+  }
+}
