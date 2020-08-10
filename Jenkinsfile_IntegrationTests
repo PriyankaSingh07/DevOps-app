@@ -1,0 +1,32 @@
+pipeline {
+    agent {
+        kubernetes {
+            customWorkspace '/home/jenkins/agent/workspace/DevOps'
+            label 'CI'
+            defaultContainer 'jnlp'
+            yamlFile 'k8sworkerpod.yml'
+        }
+    }
+stages {
+    stage('Integration Tests') {
+     steps {
+        echo " Working outside"
+        container('maven') {
+          echo " Working inside the maven container"
+          sh 'mvn verify -Dsurefire.skip=true'
+        }
+    }
+	post {
+    always {
+     junit 'target/failsafe-reports/**/*.xml'
+    }
+    success {
+     stash(name: 'artifact', includes: 'target/*.war')
+     stash(name: 'pom', includes: 'pom.xml')
+     // to add artifacts in jenkins pipeline tab (UI)
+     archiveArtifacts 'target/*.war'
+    }
+   } 
+  }
+ }
+}
