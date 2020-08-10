@@ -45,4 +45,4 @@ spec:
     name: "maven-repo-volume"    
   - name: "persist-volume"
     persistentVolumeClaim:
-      claimName: jenkins-volume-claim
+      claimName: jenkins-slave-fin-test-pvc
