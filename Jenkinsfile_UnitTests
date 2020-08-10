@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        kubernetes {
+            customWorkspace '/home/jenkins/agent/workspace/DevOps'
+            label 'CI'
+            defaultContainer 'jnlp'
+            yamlFile 'k8sworkerpod.yml'
+        }
+    }
+stages {
+    stage('Unit Tests') {
+     steps {
+        echo " Working outside"
+        container('maven') {
+          echo " Working inside the maven container"
+         sh 'mvn test'
+        }
+    }
+	post {
+	echo " Working outside"
+        container('maven') {
+          echo " Working inside the maven container"
+    always {
+       junit 'target/surefire-reports/**/*.xml'
+    }
+	}
+   } 
+  }
+ }
+}
