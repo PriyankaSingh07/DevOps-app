@@ -13,7 +13,7 @@ pipeline {
         }
     }
 stages {
-    stage('Integration Tests') {
+    stage('SonarQube') {
      steps {
         echo " Working outside"
         container('maven') {
