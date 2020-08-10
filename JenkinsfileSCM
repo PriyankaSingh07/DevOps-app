@@ -1,0 +1,23 @@
+pipeline {
+ agent {
+         kubernetes {
+            customWorkspace '/home/jenkins/agent/workspace/DevOps'
+            label 'CI'
+            defaultContainer 'jnlp'
+            yamlFile 'k8sworkerpod.yml'
+        }
+  }
+ options {
+  skipDefaultCheckout()
+ }
+stages {
+    stage('SCM') {
+      steps {
+        echo "entered into SCM Stage"
+        sh "ls /var"
+        sh "cd /var"
+        checkout scm
+      }
+    }
+  }
+}
