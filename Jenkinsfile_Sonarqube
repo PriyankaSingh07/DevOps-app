@@ -1,0 +1,32 @@
+pipeline {
+
+ environment {
+  SONARQUBE_URL = "http://10.73.123.210"
+  SONARQUBE_PORT = "9000"
+ }
+    agent {
+        kubernetes {
+            customWorkspace '/home/jenkins/agent/workspace/DevOps'
+            label 'CI'
+            defaultContainer 'jnlp'
+            yamlFile 'k8sworkerpod.yml'
+        }
+    }
+stages {
+    stage('Integration Tests') {
+     steps {
+        echo " Working outside"
+        container('maven') {
+          echo " Working inside the maven container"
+          sh " mvn sonar:sonar -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT"
+        }
+    }
+	post {
+    always {
+     // using warning next gen plugin
+     recordIssues aggregatingResults: true, tools: [javaDoc()]
+    }
+   } 
+  }
+ }
+}
