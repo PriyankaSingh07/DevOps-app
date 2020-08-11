@@ -19,13 +19,12 @@ stages {
         container('maven') {
           echo " Working inside the maven container"
           sh " mvn sonar:sonar -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT"
-	  sleep 500
         }
     }
 	post {
     always {
      // using warning next gen plugin
-     recordIssues aggregatingResults: true, tools: [pmdParser(pattern: '**/target/pmd.xml')]
+     recordIssues aggregatingResults: true, tools: [javaDoc()]
     }
    } 
   }
