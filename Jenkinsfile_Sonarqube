@@ -25,6 +25,7 @@ stages {
     always {
      // using warning next gen plugin
      recordIssues aggregatingResults: true, tools: [pmdParser(pattern: '**/target/pmd.xml')]
+     sleep 800
     }
    } 
   }
