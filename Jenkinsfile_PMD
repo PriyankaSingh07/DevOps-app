@@ -14,8 +14,8 @@ stages {
         container('maven') {
           echo " Working inside the maven container"
           sh ' mvn pmd:pmd'
-		  // using pmd plugin
-		  step([$class: 'PmdPublisher', pattern: '**/target/pmd.xml'])
+	  // using pmd plugin
+	  step([$class: 'PmdPublisher', pattern: '**/target/pmd.xml'])
         }
       }
     }
